@@ -61,7 +61,7 @@ def convert_one_wast_file(inputs):
 
 def convert_wast_to_js(out_js_dir):
     """Compile all the wast files to JS and store the results in the JS dir."""
-
+    return
     inputs = []
 
     for wast_file in glob.glob(os.path.join(WAST_TESTS_DIR, '*.wast')):
@@ -84,6 +84,7 @@ def build_js(out_js_dir, include_harness=False):
 
     print('Copying JS tests to the JS out dir...')
     for path in os.listdir(JS_TESTS_DIR):
+        print(path)
         abspath = os.path.join(JS_TESTS_DIR, path)
         if os.path.isdir(abspath):
             shutil.copytree(abspath, os.path.join(out_js_dir, path))
@@ -147,6 +148,7 @@ def build_html_js(out_dir):
         wrap_single_test(js_file)
 
 def build_html_from_js(js_html_dir, html_dir, use_sync):
+    print(list(glob.glob(os.path.join(js_html_dir, '*.js'))))
     for js_file in glob.glob(os.path.join(js_html_dir, '*.js')):
         js_filename = os.path.basename(js_file)
         html_filename = js_filename + '.html'
