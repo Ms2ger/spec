@@ -110,8 +110,8 @@ HTML_HEADER = """<!doctype html>
     </head>
     <body>
 
-        <script src={WPT_PREFIX}/testharness.js></script>
-        <script src={WPT_PREFIX}/testharnessreport.js></script>
+        <script src=/testharness.js></script>
+        <script src=/testharnessreport.js></script>
         <script src={PREFIX}/{JS_HARNESS}></script>
         <script src={PREFIX}/wasm-constants.js></script>
         <script src={PREFIX}/wasm-module-builder.js></script>
@@ -154,7 +154,6 @@ def build_html_from_js(js_html_dir, html_dir, use_sync):
         js_harness = "sync_index.js" if use_sync else "async_index.js"
         with open(html_file, 'w+') as f:
             content = HTML_HEADER.replace('{PREFIX}', './js/harness') \
-                                 .replace('{WPT_PREFIX}', './js/harness') \
                                  .replace('{JS_HARNESS}', js_harness)
             content += "        <script src=./js/{SCRIPT}></script>".replace('{SCRIPT}', js_filename)
             content += HTML_BOTTOM
@@ -185,7 +184,6 @@ def build_front_page(out_dir, js_dir, use_sync):
     js_harness = "sync_index.js" if use_sync else "async_index.js"
     with open(front_page, 'w+') as f:
         content = HTML_HEADER.replace('{PREFIX}', './js/harness') \
-                             .replace('{WPT_PREFIX}', './js/harness')\
                              .replace('{JS_HARNESS}', js_harness)
         for js_file in glob.glob(os.path.join(js_out_dir, '*.js')):
             filename = os.path.basename(js_file)
